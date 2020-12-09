@@ -4,14 +4,18 @@ using UnityEngine;
 
 public struct Cell
 {
-    public float xPos, Ypos;
+    public int xPos, Ypos;
     public float Value;
     public Room ParentRoom;
     
     private readonly Cell[,] _matrix;
 
-    public Cell(Vector2Int vector2Int, float f, float[,] matrix)
+    public Cell(Vector2Int vector2Int, float f, Cell[,] matrix)
     {
-        throw new System.NotImplementedException();
+        xPos = vector2Int.x;
+        Ypos = vector2Int.y;
+        Value = f;
+        _matrix = matrix;
+        ParentRoom = null;
     }
 }

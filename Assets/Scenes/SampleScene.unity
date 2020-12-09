@@ -290,7 +290,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 12.7, y: 12.45, z: -22.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 1020160674}
   - component: {fileID: 1020160676}
   - component: {fileID: 1020160675}
+  - component: {fileID: 1020160677}
   m_Layer: 0
   m_Name: WallMap
   m_TagString: Untagged
@@ -326,7 +327,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1157378339}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &1020160675
 TilemapRenderer:
@@ -366,7 +367,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -411,33 +412,57 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 0
     m_Data:
       e00: NaN
       e01: 1e-45
-      e02: 1289967.2
+      e02: 0
       e03: NaN
       e10: NaN
       e11: 0
-      e12: 7.76e-43
+      e12: 0
       e13: NaN
-      e20: 0
-      e21: -9.4596415e+10
-      e22: 1289967.2
-      e23: -1.729852e+30
-      e30: 0
-      e31: 4.5905e-41
-      e32: 7.76e-43
-      e33: 2.97e-43
+      e20: -2.7397838e+11
+      e21: 0
+      e22: 0
+      e23: -1.1509266e+10
+      e30: 4.5905e-41
+      e31: 0
+      e32: 0
+      e33: 4.5905e-41
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: 6.0874634, g: 6.0874634, b: 6.0874634, a: 6.0874634}
+    m_Data: {r: -6.51268, g: -6.51268, b: -6.51268, a: -6.51268}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -6, y: -5, z: 0}
-  m_Size: {x: 15, y: 11, z: 1}
+  m_Origin: {x: -11, y: -9, z: 0}
+  m_Size: {x: 33, y: 24, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -457,6 +482,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &1020160677
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020160673}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1 &1157378336
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,12 +529,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GroundTile: {fileID: 11400000, guid: 3505677f25b4d474eb1ab2372081dbe9, type: 2}
-  WallTile: {fileID: 0}
-  MapXSize: 0
-  MapYSize: 0
-  Zoom: 0
-  Seed: 
-  AutoUpdate: 0
+  WallTile: {fileID: 11400000, guid: 1036bd5aa23614b40b89c3360f04d77a, type: 2}
+  MapXSize: 25
+  MapYSize: 25
+  Zoom: 0.18
+  AutoUpdate: 1
   Camera: {fileID: 963194227}
   WallMap: {fileID: 1020160676}
   GroundMap: {fileID: 1756530725}
@@ -520,8 +560,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1020160674}
   - {fileID: 1756530723}
+  - {fileID: 1020160674}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -555,7 +595,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1157378339}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &1756530724
 TilemapRenderer:
@@ -614,15 +654,39 @@ Tilemap:
   m_Enabled: 1
   m_Tiles: {}
   m_AnimatedTiles: {}
-  m_TileAssetArray: []
-  m_TileSpriteArray: []
-  m_TileMatrixArray: []
-  m_TileColorArray: []
+  m_TileAssetArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  m_TileSpriteArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  m_TileMatrixArray:
+  - m_RefCount: 0
+    m_Data:
+      e00: NaN
+      e01: 1e-45
+      e02: 9.6993214e+10
+      e03: NaN
+      e10: NaN
+      e11: 0
+      e12: 2.63e-43
+      e13: NaN
+      e20: -2.7397838e+11
+      e21: 9.699308e+10
+      e22: -0.0013576831
+      e23: -0.000045240744
+      e30: 4.5905e-41
+      e31: 2.63e-43
+      e32: 0.04074968
+      e33: 0.0013578616
+  m_TileColorArray:
+  - m_RefCount: 0
+    m_Data: {r: -6.055023, g: -6.055023, b: -6.055023, a: -6.055023}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 0, y: 0, z: 1}
+  m_Origin: {x: -5, y: -4, z: 0}
+  m_Size: {x: 10, y: 8, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:

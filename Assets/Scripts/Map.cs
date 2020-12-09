@@ -20,7 +20,6 @@ public class Map : MonoBehaviour {
     [Header("Parameters")] 
     public int MapXSize, MapYSize;
     [Range(0,1f)] public float Zoom;
-    public string Seed;
     public bool AutoUpdate;
 
     [Header("References")] 
@@ -28,8 +27,8 @@ public class Map : MonoBehaviour {
     public Tilemap WallMap;
     public Tilemap GroundMap;
 
-    private float[,] _matrix;
-    private int maxAutoUpdateSize;
+    private Cell[,] _matrix;
+    private int maxAutoUpdateSize = 1000;
 
     private void FixedUpdate()
     {
@@ -46,13 +45,9 @@ public class Map : MonoBehaviour {
 
     public void Generate() {
         ClearMap();
-        SetupCamera();
         BlocsGeneration();
     }
-
-    public void SetupCamera() {
-        Camera.transform.position = new Vector3((float) MapXSize / 2, Camera.transform.position.y, (float) MapYSize / 2);
-    }
+    
     
     public void BlocsGeneration() {
         float[,] perlinMatrix = new float[MapXSize,MapYSize];
@@ -60,11 +55,11 @@ public class Map : MonoBehaviour {
         _matrix = new Cell[MapXSize, MapYSize];
         for (int i = 0; i < MapXSize; i++) {
             for (int j = 0; j < MapYSize; j++) {
-                float value = _matrix[i, j];
+                float value = perlinMatrix[i, j];
                 GroundMap.SetTile(new Vector3Int(i, j, 0),GroundTile);
                 if(perlinMatrix[i, j] <= 0.5) continue;
                 WallMap.SetTile(new Vector3Int(i, j, 0),WallTile);
-                _matrix[i,j] = new Cell(new Vector2Int(i,j), perlinMatrix[i,j], _matrix);
+                _matrix[i,j] = new Cell(new Vector2Int(i,j), value, _matrix);
             }
         }
     }
@@ -75,9 +70,9 @@ public class Map : MonoBehaviour {
 
     private void CreateRoom()
     {
-        foreach (Cell cell in _matrix)
+        /*foreach (Cell cell in _matrix)
         {
             
-        }
+        }*/
     }
 }
