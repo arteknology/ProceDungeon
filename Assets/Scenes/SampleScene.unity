@@ -533,7 +533,7 @@ MonoBehaviour:
   MapXSize: 25
   MapYSize: 25
   Zoom: 0.18
-  AutoUpdate: 1
+  AutoUpdate: 0
   Camera: {fileID: 963194227}
   WallMap: {fileID: 1020160676}
   GroundMap: {fileID: 1756530725}
@@ -665,28 +665,28 @@ Tilemap:
     m_Data:
       e00: NaN
       e01: 1e-45
-      e02: 9.6993214e+10
+      e02: 1089579.4
       e03: NaN
       e10: NaN
       e11: 0
-      e12: 2.63e-43
+      e12: 6.56e-43
       e13: NaN
-      e20: -2.7397838e+11
-      e21: 9.699308e+10
-      e22: -0.0013576831
-      e23: -0.000045240744
-      e30: 4.5905e-41
-      e31: 2.63e-43
-      e32: 0.04074968
-      e33: 0.0013578616
+      e20: 0
+      e21: 2.1301219e+26
+      e22: 1089579.4
+      e23: -6.395436e+33
+      e30: 0
+      e31: 4.5904e-41
+      e32: 6.56e-43
+      e33: 2.4e-44
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: -6.055023, g: -6.055023, b: -6.055023, a: -6.055023}
+    m_Data: {r: -4.827606, g: -4.827606, b: -4.827606, a: -4.827606}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -5, y: -4, z: 0}
-  m_Size: {x: 10, y: 8, z: 1}
+  m_Size: {x: 19, y: 20, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:

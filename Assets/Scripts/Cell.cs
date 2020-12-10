@@ -4,7 +4,7 @@ using UnityEngine;
 
 public struct Cell
 {
-    public int xPos, Ypos;
+    public int XPos, Ypos;
     public float Value;
     public Room ParentRoom;
     
@@ -12,7 +12,7 @@ public struct Cell
 
     public Cell(Vector2Int vector2Int, float f, Cell[,] matrix)
     {
-        xPos = vector2Int.x;
+        XPos = vector2Int.x;
         Ypos = vector2Int.y;
         Value = f;
         _matrix = matrix;
