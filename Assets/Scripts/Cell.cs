@@ -18,16 +18,12 @@ public struct Cell
         ParentRoom = null;
     }
 
-    public void SetParentRoom(Room room)
-    {
-        ParentRoom = room;
-    }
-
     public void CheckNeighbours(Room room)
     {
         ParentRoom = room;
         ParentRoom.Cells.Add(this);
         List<Cell> neighbourCells = new List<Cell>();
+
         if (_matrix.GetLength(0) < Position.x + 1)
         {
             neighbourCells.Add(_matrix[Position.x + 1, Position.y]);
@@ -44,13 +40,12 @@ public struct Cell
         {
             neighbourCells.Add(_matrix[Position.x, Position.y -1]);
         }
-
+        
         foreach (Cell neighbourCell in neighbourCells)
         {
             if (neighbourCell.Value > 0.5) continue;
             if (neighbourCell.ParentRoom != null) continue;
             neighbourCell.CheckNeighbours(room);
         }
-
     }
 }

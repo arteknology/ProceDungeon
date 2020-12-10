@@ -32,6 +32,7 @@ public class Map : MonoBehaviour {
     private Cell[,] _matrix;
     private int maxAutoUpdateSize = 100;
     private List<Room> rooms = new List<Room>();
+    private List<Vector2Int> roomCenters = new List<Vector2Int>();
 
 
     private void FixedUpdate()
@@ -52,7 +53,8 @@ public class Map : MonoBehaviour {
         ClearMap();
         BlocsGeneration();
         CreateRoom();
-        //ColorateRoom();
+        ColorateRoom();
+        //FindRoomCenter();
     }
     
     
@@ -70,6 +72,7 @@ public class Map : MonoBehaviour {
             }
         }
     }
+    
     public void ClearMap() {
         GroundMap.ClearAllTiles();
         WallMap.ClearAllTiles();
@@ -82,20 +85,34 @@ public class Map : MonoBehaviour {
             if (cell.ParentRoom != null) continue;
             if (cell.Value > 0.5) continue;
             Room currentRoom = new Room();
-            cell.CheckNeighbours(new Room());
+            cell.CheckNeighbours(currentRoom);
             rooms.Add(currentRoom);
         }
     }
 
-    /*private void ColorateRoom()
+    private void ColorateRoom()
     {
         foreach (Room room in rooms)
         {
+            //Debug.Log(room.Cells.Count);
             foreach (Cell cell in room.Cells)
             {
                 Vector3Int cellPos = new Vector3Int(cell.Position.x, cell.Position.y, 0);
-                GroundMap.SetColor(cellPos, Color.cyan);
+                GroundMap.SetTile(cellPos, null);
             }
         }
-    }*/
+    }
+
+    private void FindRoomCenter()
+    {
+        foreach (Room room in rooms)
+        {
+            room.Center();
+            roomCenters.Add(room.center);
+
+            Vector3Int centerOfRoom = new Vector3Int(room.center.x, room.center.y, 0);
+            GroundMap.SetTile(centerOfRoom, null);
+        }
+    }
+
 }
