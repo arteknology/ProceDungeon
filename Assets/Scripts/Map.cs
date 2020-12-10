@@ -31,6 +31,8 @@ public class Map : MonoBehaviour {
 
     private Cell[,] _matrix;
     private int maxAutoUpdateSize = 100;
+    private List<Room> rooms = new List<Room>();
+
 
     private void FixedUpdate()
     {
@@ -50,6 +52,7 @@ public class Map : MonoBehaviour {
         ClearMap();
         BlocsGeneration();
         CreateRoom();
+        //ColorateRoom();
     }
     
     
@@ -60,8 +63,8 @@ public class Map : MonoBehaviour {
         for (int i = 0; i < MapXSize; i++) {
             for (int j = 0; j < MapYSize; j++) {
                 float value = perlinMatrix[i, j];
-                GroundMap.SetTile(new Vector3Int(i, j, 0),GroundTile);
                 _matrix[i,j] = new Cell(new Vector2Int(i,j), value, _matrix);
+                GroundMap.SetTile(new Vector3Int(i, j, 0),GroundTile);
                 if(perlinMatrix[i, j] <= 0.5) continue;
                 WallMap.SetTile(new Vector3Int(i, j, 0),WallTile);
             }
@@ -74,55 +77,25 @@ public class Map : MonoBehaviour {
 
     private void CreateRoom()
     {
-        bool first = true;
-        Vector3Int startCellPos = new Vector3Int();
-
-        int iteration = 0;
-        List<Room> rooms = new List<Room>();
-        int roomNumber = 0;
-
-
         foreach (Cell cell in _matrix)
         {
-            if (cell.Value <= 0.5 && iteration < _matrix.Length)
-            {
-                Debug.Log("GROUND / X pos = "+ cell.XPos + " Y Pos = " + cell.Ypos);
-
-                //GET FIRST GROUND TILE / CREATE FIRST ROOM / ADD IT AS PARENT OF THE CELL / PUT IT IN ROOMS LIST
-                if (first)
-                {
-                    Cell startCell = cell;
-                    startCellPos = new Vector3Int(startCell.XPos, startCell.Ypos, 0);
-                    
-                    Room firstRoom = new Room(roomNumber);
-                    firstRoom.Cells.Add(startCell);
-                    rooms.Add(firstRoom);
-                    
-                    first = false;
-                }
-
-                //DELETE FIRST GROUND TILE TO KNOW WHERE IT IS
-                Tilemap ground = GroundMap.GetComponent<Tilemap>();
-                ground.SetTile(startCellPos, null);
-
-                //FindNeighbours(cell);
-            }
+            if (cell.ParentRoom != null) continue;
+            if (cell.Value > 0.5) continue;
+            Room currentRoom = new Room();
+            cell.CheckNeighbours(new Room());
+            rooms.Add(currentRoom);
         }
     }
 
-    
-    /*public void FindNeighbours(Cell cell)
+    /*private void ColorateRoom()
     {
-        Cell rightCell = cell;
-        rightCell.XPos = rightCell.XPos + 1;
-        
-        Cell leftCell = cell;
-        leftCell.XPos = leftCell.XPos - 1;
-        
-        Cell upCell = cell;
-        upCell.Ypos = upCell.Ypos + 1;
-        
-        Cell downCell = cell;
-        downCell.Ypos = downCell.Ypos - 1;
+        foreach (Room room in rooms)
+        {
+            foreach (Cell cell in room.Cells)
+            {
+                Vector3Int cellPos = new Vector3Int(cell.Position.x, cell.Position.y, 0);
+                GroundMap.SetColor(cellPos, Color.cyan);
+            }
+        }
     }*/
 }

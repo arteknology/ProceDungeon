@@ -17,8 +17,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/Utils/NoiseUtils.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Cell.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Room.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Cell.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Map.cs" />
       </list>
     </option>
@@ -67,6 +67,7 @@
       <workItem from="1607529462725" duration="1639000" />
       <workItem from="1607538719053" duration="12479000" />
       <workItem from="1607605303764" duration="1314000" />
+      <workItem from="1607609233543" duration="8691000" />
     </task>
     <servers />
   </component>
