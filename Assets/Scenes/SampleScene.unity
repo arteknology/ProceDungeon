@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 394129011}
   - component: {fileID: 394129010}
   m_Layer: 5
-  m_Name: Button
+  m_Name: GenerateButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -733,6 +733,8 @@ MonoBehaviour:
   Camera: {fileID: 963194227}
   WallMap: {fileID: 1020160676}
   GroundMap: {fileID: 1756530725}
+  Xoffset: 36
+  Yoffset: 10
 --- !u!156049354 &1157378338
 Grid:
   m_ObjectHideFlags: 0

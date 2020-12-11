@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Cell
@@ -41,10 +42,8 @@ public class Cell
             neighbourCells.Add(_matrix[Position.x, Position.y -1]);
         }
         
-        foreach (Cell neighbourCell in neighbourCells)
+        foreach (var neighbourCell in neighbourCells.Where(neighbourCell => !(neighbourCell.Value > 0.5)).Where(neighbourCell => neighbourCell.ParentRoom == null))
         {
-            if (neighbourCell.Value > 0.5) continue;
-            if (neighbourCell.ParentRoom != null) continue;
             neighbourCell.CheckNeighbours(ParentRoom);
         }
     }

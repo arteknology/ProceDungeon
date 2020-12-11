@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -28,10 +29,13 @@ public class Map : MonoBehaviour {
     public Camera Camera;
     public Tilemap WallMap;
     public Tilemap GroundMap;
+    public int Xoffset;
+    public int Yoffset;
 
     private Cell[,] _matrix;
     private int maxAutoUpdateSize = 100;
     private List<Room> rooms = new List<Room>();
+    private float[,] Network;
 
     private void FixedUpdate()
     {
@@ -51,13 +55,13 @@ public class Map : MonoBehaviour {
         ClearMap();
         BlocsGeneration();
         CreateRoom();
-        FindRoomCenter();
+        CreateNetwork();
     }
-    
-    
-    public void BlocsGeneration() {
+
+
+    private void BlocsGeneration() {
         float[,] perlinMatrix = new float[MapXSize,MapYSize];
-        perlinMatrix = NoiseUtils.PerlinCave(perlinMatrix, Zoom, 0, 0);
+        perlinMatrix = NoiseUtils.PerlinCave(perlinMatrix, Zoom, Xoffset, Yoffset);
         _matrix = new Cell[MapXSize, MapYSize];
         for (int i = 0; i < MapXSize; i++) {
             for (int j = 0; j < MapYSize; j++) {
@@ -69,8 +73,8 @@ public class Map : MonoBehaviour {
             }
         }
     }
-    
-    public void ClearMap() {
+
+    private void ClearMap() {
         GroundMap.ClearAllTiles();
         WallMap.ClearAllTiles();
     }
@@ -86,14 +90,17 @@ public class Map : MonoBehaviour {
             rooms.Add(currentRoom);
         }
     }
-    
-    private void FindRoomCenter()
-    {
-        foreach (Room room in rooms)
-        {
-            Vector3Int centerOfRoom = new Vector3Int(room.CenterCell.Position.x, room.CenterCell.Position.y, 0);
-            GroundMap.SetTile(centerOfRoom, null);
-        }
-    }
 
+    private void CreateNetwork()
+    {
+        Network = new float[rooms.Count, rooms.Count];
+        for (int i = 0; i < rooms.Count; i++)
+            {
+                for (int j = 0; j < rooms.Count; j++)
+                {
+
+                }
+            }
+        }
 }
+

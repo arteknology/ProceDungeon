@@ -7,15 +7,11 @@ public class Room
 {
     public List<Cell> Cells = new List<Cell>();
 
-    public Vector2Int Center
+    private Vector2Int Center
     {
         get
         {
-            Vector2Int sum = Vector2Int.zero;
-            foreach (Cell cell in Cells)
-            {
-                sum += cell.Position;
-            }
+            Vector2Int sum = Cells.Aggregate(Vector2Int.zero, (current, cell) => current + cell.Position);
             return new Vector2Int(Mathf.RoundToInt((float)sum.x / Cells.Count), Mathf.RoundToInt((float)sum.y/Cells.Count));
         }
     }
@@ -28,13 +24,10 @@ public class Room
             Cell centerCell = null;
             float shorterDistance = Mathf.Infinity;
 
-            foreach (Cell cell in Cells)
+            foreach (var cell in Cells.Where(cell => Vector2Int.Distance(center, cell.Position) < shorterDistance))
             {
-                if (centerCell == null || Vector2Int.Distance(center, cell.Position) < shorterDistance)
-                {
-                    shorterDistance = Vector2Int.Distance(center, cell.Position);
-                    centerCell = cell;
-                }
+                shorterDistance = Vector2Int.Distance(center, cell.Position);
+                centerCell = cell;
             }
             return centerCell;
         }
