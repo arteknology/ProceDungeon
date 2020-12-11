@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Utils;
 using Random = System.Random;
+// ReSharper disable All
 
 public class Map : MonoBehaviour {
 
@@ -37,8 +38,9 @@ public class Map : MonoBehaviour {
     private List<Room> rooms = new List<Room>();
     private float[,] Network;
     private Graph.Edge[] _edges;
-
-    private void FixedUpdate()
+    private bool Blocks = false;
+    
+    /*private void FixedUpdate()
     {
         if (!AutoUpdate) return;
         if (MapXSize + MapYSize > maxAutoUpdateSize)
@@ -49,16 +51,21 @@ public class Map : MonoBehaviour {
         {
             Generate();
         }
-    }
+    }*/
 
     [ContextMenu("Generate")]
-    public void Generate() {
+    public void Generate()
+    {
+        Blocks = false;
         ClearMap();
         BlocsGeneration();
-        CreateRoom();
-        CreateNetwork();
-        CreateMST();  
-        CreateCorridor();
+        if (Blocks)
+        {
+            CreateRoom();
+            CreateNetwork();
+            CreateMST();
+            CreateCorridor();
+        }
         FillTiles();
     }
 
@@ -73,6 +80,8 @@ public class Map : MonoBehaviour {
                 _matrix[i,j] = new Cell(new Vector2Int(i,j), value, _matrix);
             }
         }
+
+        Blocks = true;
     }
 
     private void ClearMap() {
@@ -178,7 +187,7 @@ public class Map : MonoBehaviour {
                 WallMap.SetTile(cellPos,WallTile);
             }
         }
-
+    
     }
     
 }
