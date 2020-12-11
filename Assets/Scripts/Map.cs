@@ -58,6 +58,8 @@ public class Map : MonoBehaviour {
         CreateRoom();
         CreateNetwork();
         CreateMST();  
+        CreateCorridor();
+        FillTiles();
     }
 
 
@@ -69,9 +71,6 @@ public class Map : MonoBehaviour {
             for (int j = 0; j < MapYSize; j++) {
                 float value = perlinMatrix[i, j];
                 _matrix[i,j] = new Cell(new Vector2Int(i,j), value, _matrix);
-                GroundMap.SetTile(new Vector3Int(i, j, 0),GroundTile);
-                if(perlinMatrix[i, j] <= 0.5) continue;
-                WallMap.SetTile(new Vector3Int(i, j, 0),WallTile);
             }
         }
     }
@@ -124,7 +123,62 @@ public class Map : MonoBehaviour {
 
     private void CreateCorridor()
     {
-        
+        foreach (Graph.Edge edge in _edges)
+        {
+         Cell srcCell = rooms[edge.src].CenterCell;
+         Cell destCell = rooms[edge.dest].CenterCell;
+
+         int distX = destCell.Position.x - srcCell.Position.x;
+         int distY = destCell.Position.y - srcCell.Position.y;
+
+         if (distX > 0)
+         {
+             for (int i = srcCell.Position.x; i < destCell.Position.x; i++)
+             {
+                 _matrix[i, srcCell.Position.y].Value = -1;
+             }
+         }
+         else
+         {
+             for (int i = srcCell.Position.x; i > destCell.Position.x; i--)
+             {
+                 _matrix[i, srcCell.Position.y].Value = -1;
+             }
+         }
+
+         if (distY > 0)
+         {
+             for (int j = srcCell.Position.y; j < destCell.Position.y; j++)
+             {
+                 _matrix[destCell.Position.x, j].Value = -1;
+             }
+         }
+         else
+         {
+             for (int j = srcCell.Position.y; j > destCell.Position.y; j--)
+             {
+                 _matrix[destCell.Position.x, j].Value = -1;
+             }
+         }
+        }
+    }
+
+    private void FillTiles()
+    {
+        foreach (Cell cell in _matrix)
+        {
+            Vector3Int cellPos = new Vector3Int(cell.Position.x, cell.Position.y, 0);
+            if (cell.Value < 0.5)
+            {
+                GroundMap.SetTile(cellPos,GroundTile);
+            }
+
+            if (cell.Value >= 0.5)
+            {
+                WallMap.SetTile(cellPos,WallTile);
+            }
+        }
+
     }
     
 }
