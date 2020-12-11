@@ -32,8 +32,6 @@ public class Map : MonoBehaviour {
     private Cell[,] _matrix;
     private int maxAutoUpdateSize = 100;
     private List<Room> rooms = new List<Room>();
-    private List<Vector2Int> roomCenters = new List<Vector2Int>();
-
 
     private void FixedUpdate()
     {
@@ -53,8 +51,7 @@ public class Map : MonoBehaviour {
         ClearMap();
         BlocsGeneration();
         CreateRoom();
-        ColorateRoom();
-        //FindRoomCenter();
+        FindRoomCenter();
     }
     
     
@@ -89,28 +86,12 @@ public class Map : MonoBehaviour {
             rooms.Add(currentRoom);
         }
     }
-
-    private void ColorateRoom()
-    {
-        foreach (Room room in rooms)
-        {
-            //Debug.Log(room.Cells.Count);
-            foreach (Cell cell in room.Cells)
-            {
-                Vector3Int cellPos = new Vector3Int(cell.Position.x, cell.Position.y, 0);
-                GroundMap.SetTile(cellPos, null);
-            }
-        }
-    }
-
+    
     private void FindRoomCenter()
     {
         foreach (Room room in rooms)
         {
-            room.Center();
-            roomCenters.Add(room.center);
-
-            Vector3Int centerOfRoom = new Vector3Int(room.center.x, room.center.y, 0);
+            Vector3Int centerOfRoom = new Vector3Int(room.CenterCell.Position.x, room.CenterCell.Position.y, 0);
             GroundMap.SetTile(centerOfRoom, null);
         }
     }

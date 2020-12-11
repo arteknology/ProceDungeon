@@ -1,19 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Room
 {
     public List<Cell> Cells = new List<Cell>();
-    public Vector2Int center = Vector2Int.zero;
 
-    public void Center()
+    public Vector2Int Center
     {
-        for (int i = 0; i < Cells.Count; i++)
+        get
         {
-            center += Cells[i].Position;
+            Vector2Int sum = Vector2Int.zero;
+            foreach (Cell cell in Cells)
+            {
+                sum += cell.Position;
+            }
+            return new Vector2Int(Mathf.RoundToInt((float)sum.x / Cells.Count), Mathf.RoundToInt((float)sum.y/Cells.Count));
         }
-        center = center / Cells.Count;
-        //Debug.Log(center);
+    }
+
+    public Cell CenterCell
+    {
+        get
+        {
+            Vector2Int center = Center;
+            Cell centerCell = null;
+            float shorterDistance = Mathf.Infinity;
+
+            foreach (Cell cell in Cells)
+            {
+                if (centerCell == null || Vector2Int.Distance(center, cell.Position) < shorterDistance)
+                {
+                    shorterDistance = Vector2Int.Distance(center, cell.Position);
+                    centerCell = cell;
+                }
+            }
+            return centerCell;
+        }
     }
 }

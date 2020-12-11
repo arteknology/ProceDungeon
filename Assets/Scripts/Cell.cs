@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct Cell
+public class Cell
 {
     public Vector2Int Position;
     public float Value;
@@ -24,19 +24,19 @@ public struct Cell
         ParentRoom.Cells.Add(this);
         List<Cell> neighbourCells = new List<Cell>();
 
-        if (_matrix.GetLength(0) < Position.x + 1)
+        if (_matrix.GetLength(0) > Position.x + 1)
         {
             neighbourCells.Add(_matrix[Position.x + 1, Position.y]);
         }
-        if (_matrix.GetLength(0) < Position.x - 1)
+        if (_matrix.GetLength(0) > Position.x - 1)
         {
             neighbourCells.Add(_matrix[Position.x - 1, Position.y]);
         }
-        if (_matrix.GetLength(1) < Position.y + 1)
+        if (_matrix.GetLength(1) > Position.y + 1)
         {
             neighbourCells.Add(_matrix[Position.x, Position.y + 1]);
         }
-        if (_matrix.GetLength(1) < Position.y - 1)
+        if (_matrix.GetLength(1) > Position.y - 1)
         {
             neighbourCells.Add(_matrix[Position.x, Position.y -1]);
         }
@@ -45,7 +45,7 @@ public struct Cell
         {
             if (neighbourCell.Value > 0.5) continue;
             if (neighbourCell.ParentRoom != null) continue;
-            neighbourCell.CheckNeighbours(room);
+            neighbourCell.CheckNeighbours(ParentRoom);
         }
     }
 }
