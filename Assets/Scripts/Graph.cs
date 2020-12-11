@@ -1,8 +1,9 @@
 ﻿using System;
- 
+using UnityEngine;
+
 class Graph {
  
-    class Edge : IComparable<Edge> {
+    public class Edge : IComparable<Edge> {
         public int src, dest, weight;
  
         // Comparator function used for sorting edges
@@ -22,10 +23,10 @@ class Graph {
     };
  
     int V, E; // V-> no. of vertices & E->no.of edges
-    Edge[] edge; // collection of all edges
+    public Edge[] edge; // collection of all edges
  
     // Creates a graph with V vertices and E edges
-    Graph(int v, int e)
+    public Graph(int v, int e)
     {
         V = v;
         E = e;
@@ -71,7 +72,7 @@ class Graph {
  
     // The main function to construct MST
     // using Kruskal's algorithm
-    void KruskalMST()
+    public Edge[] KruskalMST()
     {
         // This will store the
         // resultant MST
@@ -121,69 +122,8 @@ class Graph {
             }
             // Else discard the next_edge
         }
- 
-        // print the contents of result[] to display
-        // the built MST
-        Console.WriteLine("Following are the edges in "
-                          + "the constructed MST");
 
-        int minimumCost = 0;
-        for (i = 0; i < e; ++i)
-        {
-            Console.WriteLine(result[i].src + " -- "
-                              + result[i].dest
-                              + " == " + result[i].weight);
-          minimumCost += result[i].weight;
-        }
-       
-        Console.WriteLine("Minimum Cost Spanning Tree"
-                          + minimumCost);
-        Console.ReadLine();
-    }
- 
-    // Driver Code
-    public static void Main(String[] args)
-    {
- 
-        /* Let us create following weighted graph
-                10
-            0--------1
-            | \ |
-        6| 5\ |15
-            | \ |
-            2--------3
-                4 */
-        int V = 4; // Number of vertices in graph
-        int E = 5; // Number of edges in graph
-        Graph graph = new Graph(V, E);
- 
-        // add edge 0-1
-        graph.edge[0].src = 0;
-        graph.edge[0].dest = 1;
-        graph.edge[0].weight = 10;
- 
-        // add edge 0-2
-        graph.edge[1].src = 0;
-        graph.edge[1].dest = 2;
-        graph.edge[1].weight = 6;
- 
-        // add edge 0-3
-        graph.edge[2].src = 0;
-        graph.edge[2].dest = 3;
-        graph.edge[2].weight = 5;
- 
-        // add edge 1-3
-        graph.edge[3].src = 1;
-        graph.edge[3].dest = 3;
-        graph.edge[3].weight = 15;
- 
-        // add edge 2-3
-        graph.edge[4].src = 2;
-        graph.edge[4].dest = 3;
-        graph.edge[4].weight = 4;
- 
-        // Function call
-        graph.KruskalMST();
+        return result;
     }
 }
  

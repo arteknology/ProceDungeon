@@ -29,13 +29,14 @@ public class Map : MonoBehaviour {
     public Camera Camera;
     public Tilemap WallMap;
     public Tilemap GroundMap;
-    public int Xoffset;
-    public int Yoffset;
+    public float Xoffset;
+    public float Yoffset;
 
     private Cell[,] _matrix;
     private int maxAutoUpdateSize = 100;
     private List<Room> rooms = new List<Room>();
     private float[,] Network;
+    private Graph.Edge[] _edges;
 
     private void FixedUpdate()
     {
@@ -56,6 +57,7 @@ public class Map : MonoBehaviour {
         BlocsGeneration();
         CreateRoom();
         CreateNetwork();
+        CreateMST();  
     }
 
 
@@ -94,13 +96,36 @@ public class Map : MonoBehaviour {
     private void CreateNetwork()
     {
         Network = new float[rooms.Count, rooms.Count];
-        for (int i = 0; i < rooms.Count; i++)
+        for (int i = 0; i < rooms.Count; i++) {
+            for (int j = 0; j < rooms.Count; j++)
             {
-                for (int j = 0; j < rooms.Count; j++)
-                {
-
-                }
+                Network[i, j] = Vector2Int.Distance(rooms[i].CenterCell.Position, rooms[j].CenterCell.Position);
             }
         }
+    }
+
+    private void CreateMST()
+    {
+        int V = rooms.Count;
+        int E = Network.Length;
+        Graph graph = new Graph(V, E);
+        
+        for (int i = 0; i < V; i++)
+        {
+            for (int j = 0; j < V; j++)
+            {
+                graph.edge[i + j].src = i;
+                graph.edge[i + j].dest = j;
+                graph.edge[i + j].weight = (int) Network[i, j];
+            }
+        }
+        _edges = graph.KruskalMST();
+    }
+
+    private void CreateCorridor()
+    {
+        
+    }
+    
 }
 

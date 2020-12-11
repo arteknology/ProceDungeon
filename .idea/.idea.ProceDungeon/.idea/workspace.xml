@@ -17,10 +17,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Utils/NoiseUtils.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Room.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Cell.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Graph.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Utils/NoiseUtils.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Map.cs" />
       </list>
     </option>

@@ -4,7 +4,7 @@ using Random = System.Random;
 namespace Utils {
 	public static class NoiseUtils {
 	
-		public static float[,] PerlinCave(float[,] map, float zoom, int xOffset, int yOffset) {
+		public static float[,] PerlinCave(float[,] map, float zoom, float xOffset, float yOffset) {
 			for (int x = 0; x < map.GetLength(0); x++) {
 				for (int y = 0; y < map.GetLength(1); y++) {
 					if (x == 0 || y == 0 || x == map.GetLength(0) - 1 || y == map.GetLength(1) - 1)
